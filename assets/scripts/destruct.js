@@ -1,3 +1,6 @@
+const destructGroup = document.querySelector(".destruct");
+const destructUserBtn = destructGroup.querySelector(".destruct-obj-btn");
+
 const user = {
     firstName: "John",
     lastName: "Doe",
@@ -45,3 +48,31 @@ const user = {
         ],
     },
 };
+
+function destruct(obj) {
+    const {
+        age,
+        education: { university },
+        address: {
+            city,
+            coordinates: { latitude },
+        },
+        contacts: { email: userEmail },
+        hobbies: [, secondHobbie],
+        family: {
+            children: [{ name: firstChildName }],
+        },
+    } = user;
+
+    console.log(`age >> ${age}`);
+    console.log(`university >> ${university}`);
+    console.log(`city >> ${city}`);
+    console.log(`latitude >> ${latitude}`);
+    console.log(`userEmail >> ${userEmail}`);
+    console.log(`secondHobbie >> ${secondHobbie}`);
+    console.log(`firstChildName >> ${firstChildName}`);
+}
+
+destructGroup.addEventListener("click", () => {
+    destruct(user);
+});
