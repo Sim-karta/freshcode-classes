@@ -1,3 +1,9 @@
+const rangeGroup = document.querySelector(".range");
+const rangeShowBtn = rangeGroup.querySelector(".range-show-btn");
+const rangeFromBtn = rangeGroup.querySelector(".range-from-btn");
+const rangeToBtn = rangeGroup.querySelector(".range-to-btn");
+const rangeCheckBtn = rangeGroup.querySelector(".range-check-btn");
+
 class RangeValidator {
     constructor() {
         this._from = -Infinity;
@@ -41,19 +47,38 @@ class RangeValidator {
     }
 
     isValid(num) {
-        return num > this.from && num < this.to;
+        return num >= this.from && num <= this.to;
     }
 }
 
 const rangeValid = new RangeValidator();
 
-try {
-    rangeValid.from = 10;
-    rangeValid.to = 20;
-
+rangeShowBtn.addEventListener("click", () => {
     console.dir(rangeValid);
-    console.log(rangeValid.range);
-    console.log(rangeValid.isValid(-1));
-} catch (err) {
-    console.info(err);
-}
+    console.log(`range >> ${rangeValid.range}`);
+});
+
+rangeFromBtn.addEventListener("click", () => {
+    const value = Number(prompt("Введіть нижню межу (from):"));
+
+    try {
+        rangeValid.from = value;
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+rangeToBtn.addEventListener("click", () => {
+    const value = Number(prompt("Введіть верхню межу (to):"));
+
+    try {
+        rangeValid.to = value;
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+rangeCheckBtn.addEventListener("click", () => {
+    const value = Number(prompt("Введіть число для перевірки:"));
+    console.log(`isValid(${value}) >> ${rangeValid.isValid(value)}`);
+});
