@@ -1,3 +1,9 @@
+const postGroup = document.querySelector(".post");
+const postShowBtn = postGroup.querySelector(".post-show-btn");
+const postLikeBtn = postGroup.querySelector(".post-like-btn");
+const postDislikeBtn = postGroup.querySelector(".post-dislike-btn");
+const postEditBtn = postGroup.querySelector(".post-edit-btn");
+
 class Post {
     constructor({ id, title, author, text, date, likes }) {
         this._id = id;
@@ -10,7 +16,7 @@ class Post {
 
     set text(text) {
         if (text.trim() !== "") {
-            this._text = text;
+            this._text = text.trim();
         }
     }
 
@@ -46,15 +52,18 @@ const post1 = new Post({
     likes: 0,
 });
 
-console.dir(post1);
+postShowBtn.addEventListener("click", () => {
+    console.dir(post1);
+});
 
-post1.like();
-post1.like();
-post1.like();
-post1.dislike();
-post1.dislike();
-post1.dislike();
-post1.dislike();
-post1.dislike();
+postLikeBtn.addEventListener("click", () => {
+    post1.like();
+});
 
-post1.editText("   ");
+postDislikeBtn.addEventListener("click", () => {
+    post1.dislike();
+});
+
+postEditBtn.addEventListener("click", () => {
+    post1.editText(prompt("Введіть новий текст посту"));
+});
