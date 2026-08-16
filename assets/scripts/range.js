@@ -1,7 +1,7 @@
 class RangeValidator {
     constructor(from, to) {
-        this.from = from;
-        this.to = to;
+        this._from = from;
+        this._to = to;
     }
 
     get from() {
@@ -27,9 +27,14 @@ class RangeValidator {
     get range() {
         return [this.from, this.to];
     }
+
+    isValid(num) {
+        return num > this.from && num < this.to;
+    }
 }
 
 const rangeValid = new RangeValidator(0, Infinity);
 
 console.dir(rangeValid);
 console.log(rangeValid.range);
+console.log(rangeValid.isValid(-1));
