@@ -17,10 +17,14 @@ class RangeValidator {
     }
 
     set to(to) {
-        this._to = to;
+        if (to > this.from) {
+            this._to = to;
+        } else {
+            this._to = this.from;
+        }
     }
 }
 
-const rangeValid = new RangeValidator(0, Infinity);
+const rangeValid = new RangeValidator(0, -1);
 
 console.dir(rangeValid);
