@@ -23,8 +23,13 @@ class RangeValidator {
             this._to = this.from;
         }
     }
+
+    get range() {
+        return [this.from, this.to];
+    }
 }
 
-const rangeValid = new RangeValidator(0, -1);
+const rangeValid = new RangeValidator(0, Infinity);
 
 console.dir(rangeValid);
+console.log(rangeValid.range);
