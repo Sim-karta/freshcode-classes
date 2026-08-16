@@ -1,7 +1,7 @@
 class RangeValidator {
-    constructor(from, to) {
-        this._from = from;
-        this._to = to;
+    constructor() {
+        this._from = -Infinity;
+        this._to = Infinity;
     }
 
     get from() {
@@ -9,7 +9,15 @@ class RangeValidator {
     }
 
     set from(from) {
-        this._from = from;
+        if (!Number.isInteger(from)) {
+            throw TypeError();
+        }
+
+        if (from < this.to) {
+            this._from = from;
+        } else {
+            throw RangeError();
+        }
     }
 
     get to() {
@@ -17,10 +25,14 @@ class RangeValidator {
     }
 
     set to(to) {
+        if (!Number.isInteger(to)) {
+            throw TypeError();
+        }
+
         if (to > this.from) {
             this._to = to;
         } else {
-            this._to = this.from;
+            throw RangeError();
         }
     }
 
@@ -33,8 +45,15 @@ class RangeValidator {
     }
 }
 
-const rangeValid = new RangeValidator(0, Infinity);
+const rangeValid = new RangeValidator();
 
-console.dir(rangeValid);
-console.log(rangeValid.range);
-console.log(rangeValid.isValid(-1));
+try {
+    rangeValid.from = 10;
+    rangeValid.to = 20;
+
+    console.dir(rangeValid);
+    console.log(rangeValid.range);
+    console.log(rangeValid.isValid(-1));
+} catch (err) {
+    console.info(err);
+}
